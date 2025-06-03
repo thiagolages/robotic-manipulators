@@ -1,0 +1,47 @@
+Title,Body,Labels,Assignees,Status,Epic,Priority,Sprint
+Docker: Criar Dockerfile base,"**Descrição**
+Imagem Ubuntu 22.04 + Python ≥3.11, robotics‑toolbox‑python, NumPy, SciPy, Matplotlib, Jupyter, VS Code dev‑container,             CoppeliaSim 4.3 headless, Remote‑API bindings, pytest e pre‑commit.
+
+**Critérios de aceitação**
+- `docker build .` finaliza sem erro em < 15 min
+- `python -c ""import roboticstoolbox as rtb""` executa sem exceções
+- README explica uso do container e VSCode dev‑container
+
+**Checklist**
+- [ ] Pesquisar dependências da Robotics Toolbox
+- [ ] Baixar CoppeliaSim 4.3 para `/opt/coppeliasim`
+- [ ] Criar usuário não‑root `robot`
+- [ ] Expor porta 19997
+- [ ] Adicionar script `entrypoint.sh` configurando `PYTHONPATH`
+- [ ] Publicar imagem em ghcr.io","docker,task",,To Do,Epic 1 – Docker & Dev Env,High,Sprint 1
+Docker: Pipeline CI para build e push,"Configurar GitHub Actions que:
+1. Executa a cada push em `docker/**`
+2. Faz `docker build --push` para ghcr.io
+3. Roda `pytest` dentro do container; falha se testes quebram.","docker,ci,task",,To Do,Epic 1 – Docker & Dev Env,High,Sprint 1
+Simulação: Modelar Comau SmartSix em Python,"Implementar arquivo `models/comau_smartsix.py` contendo parâmetros DH retirados dos PDFs.
+Incluir teste unitário que compara matriz homogênea com resultado MATLAB.","simulation,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 2
+"Simulação: Plotar configuração inicial q=[0,0,-90°,0,-90°,0]","Função `show_initial_pose()` gera figura e salva em `reports/img/pose_init.png`.
+Utilizar método `.plot()` da Robotics Toolbox.","simulation,task",,To Do,Epic 2 – Modelagem & Simulação,Medium,Sprint 2
+Controle: Portar `control.m` para Python,"Traduzir script MATLAB para módulo Python.
+- Funções: Jacobiana, erro eixo‑ângulo, controlador cinemático.
+- Coveragem de testes ≥ 80 %.","simulation,control,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 3
+Controle: Regulação P0→P4,Implementar função de regulação com orientação fixa. Verificar limites de junta.,"simulation,control,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 3
+Trajetória: Seguimento linear P4→P1 e P1→P2,Gerar trajetória linear com velocidade constante usando `rtb.tools.trajectory.ctraj`.,"simulation,trajectory,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 3
+Trajetória: Seguimento circular plano YZ (2 voltas),"Centro [1000,0,650] mm, raio 350 mm, inicia em [1000,0,300] mm, sentido horário.
+Usar `rtb.tools.trajectory.mstraj` ou código próprio.","simulation,trajectory,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 3
+Log: Salvar `q_seq` e tempo em NPZ,Armazenar matriz (6×N) e vetor tempo `t` em `logs/q_seq.npz`; fornecer loader.,"simulation,logging,task",,To Do,Epic 2 – Modelagem & Simulação,Medium,Sprint 3
+Bridge: Publicar joint angles na CoppeliaSim,"Script `coppelia_play.py` lê `q_seq.npz` e publica via Remote API.
+Validação visual: modelo `smartsix.ttt`.","simulation,coppelia,task",,To Do,Epic 2 – Modelagem & Simulação,High,Sprint 4
+Lab: Checklist de inicialização do robô,"Criar lista passo‑a‑passo de energização, CLEAR alarmes e anexar fotos.","lab,task",,To Do,Epic 3 – Prática de Laboratório,High,Sprint 2
+Lab: Programar posições no Teach Pendant (PDL2),"Configurar quadrado P1‑P4, LEDs U1‑U4, loop de repetição.","lab,task",,To Do,Epic 3 – Prática de Laboratório,High,Sprint 4
+Lab: Guia rápido Teach Pendant + WinC4G,"Documento `.md` com GIFs de load, edit, run, clear memory.","lab,doc,task",,To Do,Epic 3 – Prática de Laboratório,Medium,Sprint 2
+Lab: Registro de dados da prática,"Planilha `lab/logbook.xlsx` com datas, anomalias, tempo de ciclo.","lab,logging,task",,To Do,Epic 3 – Prática de Laboratório,Medium,Sprint 4
+Docs: Estrutura do relatório (LaTeX),Criar `reports/main.tex` com template ABNT ou IEEE e seções fixas.,"doc,task",,To Do,Epic 4 – Documentação,Medium,Sprint 2
+Docs: Inserir figuras e gráficos,"Salvar imagens em `reports/img/`, usar Matplotlib 300 dpi.","doc,graphics,task",,To Do,Epic 4 – Documentação,Medium,Sprint 4
+Docs: Revisão técnica & ortográfica,Rodar Grammarly e VSCode spell‑checker (pt‑BR); conferir citações.,"doc,qa,task",,To Do,Epic 4 – Documentação,High,Sprint 5
+Docs: PDF final + DOI (Zenodo),Compilar PDF final e publicar no Zenodo com DOI.,"doc,release,task",,To Do,Epic 4 – Documentação,High,Sprint 5
+Apresentação: Slide deck 10‑12 min,Criar slides (Google Slides ou Beamer) incluindo vídeo da simulação.,"presentation,task",,To Do,Epic 5 – Apresentação,High,Sprint 5
+Apresentação: Ensaio geral & time‑boxing,"Cronometrar apresentação < 12 min, gravar Loom para feedback.","presentation,task",,To Do,Epic 5 – Apresentação,Medium,Sprint 5
+"QA: Configurar pre‑commit (black, ruff, pytest)",Arquivo `.pre-commit-config.yaml`; CI bloqueia se lint falhar.,"qa,ci,task",,To Do,Epic 6 – Qualidade,Medium,Sprint 1
+QA: Pull‑request template & CODEOWNERS,Adicionar `PULL_REQUEST_TEMPLATE.md` e configurar revisores automáticos.,"qa,task",,To Do,Epic 6 – Qualidade,Medium,Sprint 1
+QA: Processo de code review (≥2 aprovações),Documentar política de merge no README; atualizar branch protection.,"qa,task",,To Do,Epic 6 – Qualidade,Medium,Sprint 1
