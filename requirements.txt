@@ -1,0 +1,10 @@
+# All necessary dependencies will be installed from the robotics toolbox.
+roboticstoolbox-python== 1.1.1
+numpy==1.26.4
+ipython
+spatialmath-python
+swift-sim
+scipy
+matplotlib
+pyzmq
+cbor2

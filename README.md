@@ -1,13 +1,71 @@
-# robotic-manipulators
+# Python Robotics Docker Project
 
-# Comau SmartSix – Robotics Toolbox (Python)
+This project is a Dockerized Python application that utilizes the Robotics Toolbox by Peter Corke for creating and visualizing robotic models in 3D.
 
-A collaborative university project that:
+## Project Structure
 
-* **Ports** the original MATLAB control scripts for the Comau SmartSix manipulator to **Python** using Peter Corke’s Robotics Toolbox.  
-* **Simulates** trajectories and controllers in Python *and* visualises them in CoppeliaSim.  
-* **Executes** the same trajectories on the real robot arm during a scheduled lab practice.  
-* Ships a **Docker** image + Dev Container so every team-member works in an identical environment.  
-* Tracks progress with a GitHub Project board, weekly 1-week sprints and automated CI.
+```
+python-robotics-docker-project
+├── src
+│   └── main.py          # Main entry point of the application
+├── Dockerfile            # Dockerfile for building the Docker image
+├── docker-compose.yml    # Docker Compose configuration
+├── Makefile              # Makefile for managing Docker containers
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
+```
 
----
+## Getting Started
+
+To get started with this project, follow the instructions below.
+
+### Prerequisites
+
+Make sure you have Docker and Docker Compose installed on your machine.
+
+### Building the Docker Image
+
+You can build the Docker image using the following command:
+
+```bash
+make build
+```
+
+### Running the Application
+
+To run the application, use the following command:
+
+```bash
+make run
+```
+This will start the Docker container.
+
+### Inside the container:
+```
+python -m roboticstoolbox.tools.np  # sanity-check RTP
+python demo.py                      # talk to CoppeliaSim
+```
+
+### Stopping the Application
+
+To stop the running application, use:
+
+```bash
+make stop
+```
+
+### Cleaning Up
+
+To remove the Docker containers and images, run:
+
+```bash
+make clean
+```
+
+## Functionality
+
+The application allows users to create and visualize robotic models in 3D using the Robotics Toolbox. You can modify the `src/main.py` file to implement different robotic models and visualizations.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
