@@ -23,6 +23,26 @@ To get started with this project, follow the instructions below.
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
+#### Linux (Ubuntu/Debian)
+
+- Download and install Docker Engine using the official convenience script:
+    - `curl -fsSL https://get.docker.com | sudo sh`
+- Add yourself to the docker group to run Docker without sudo:
+    - `sudo usermod -aG docker $USER && newgrp docker`
+- Install the Docker Compose v2 plugin:
+    - `sudo apt install -y docker-compose-plugin`
+- Pull a test image and confirm Docker runs correctly:
+    - `docker run hello-world`
+
+#### Windows 10/11
+
+- Install Docker Desktop via Windows Package Manager:
+    - `winget install -e --id Docker.DockerDesktop`
+- Reboot to finish driver and service setup.
+- Run Docker Desktop once to start the background daemon and accept prompts.
+- Download a test image and verify the installation:
+    - `docker run hello-world`
+
 ### Pre-commit
 On your python environment, run:
 - `pip install pre-commit isort flake8 black`
