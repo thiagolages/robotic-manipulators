@@ -7,8 +7,8 @@ Usage:
     python import_backlog.py backlog.csv
 
 Rules:
-  • If an issue with the same title already exists (case-insensitive), reuse it.
-  • Otherwise, create the issue, create any missing labels, apply labels/assignees.
+  • If an issue with the same title already exists (case-insensitive),reuse it.
+  • Otherwise, create the issue, any missing labels, apply labels/assignees.
   • In both cases, add the issue to the Project (ignore if already present).
 
 Requirements:
@@ -20,13 +20,16 @@ python import_backlog.py backlog.csv
 
 """
 
-import csv, json, subprocess, sys, textwrap
+import csv
+import json
+import subprocess
+import sys
 
 # --------- CONFIGURE HERE ------------------------------------
-OWNER   = "thiagolages"
-REPO    = "robotic-manipulators"
-PROJECT = 2                       # Project number
-CSVPATH = sys.argv[1]             # backlog.csv
+OWNER = "thiagolages"
+REPO = "robotic-manipulators"
+PROJECT = 2  # Project number
+CSVPATH = sys.argv[1]  # backlog.csv
 # -------------------------------------------------------------
 
 
@@ -42,7 +45,17 @@ def run(cmd):
 def ensure_label(label: str):
     """Create label if it doesn't exist."""
     existing = run(
-        ["gh", "label", "list", "--repo", f"{OWNER}/{REPO}", "--limit", "500", "--json", "name"]
+        [
+            "gh",
+            "label",
+            "list",
+            "--repo",
+            f"{OWNER}/{REPO}",
+            "--limit",
+            "500",
+            "--json",
+            "name",
+        ]
     )
     if not any(d["name"].lower() == label.lower() for d in json.loads(existing)):
         run(
@@ -60,7 +73,9 @@ def ensure_label(label: str):
 
 
 def find_existing_issue(title: str) -> str | None:
-    """Return URL of existing issue with exact same title (case-insensitive), else None."""
+    """
+    Return URL of existing issue with same title (case-insensitive), else None.
+    """
     data = run(
         [
             "gh",
@@ -107,9 +122,9 @@ def add_to_project(issue_url: str):
 with open(CSVPATH, newline="", encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        title        = row["Title"].strip()
-        body         = row["Body"].strip()
-        labels_raw   = row["Labels"].strip()
+        title = row["Title"].strip()
+        body = row["Body"].strip()
+        labels_raw = row["Labels"].strip()
         assignees_raw = row["Assignees"].strip()
 
         # 1) Does it exist?
@@ -122,7 +137,7 @@ with open(CSVPATH, newline="", encoding="utf-8") as csvfile:
         # 2) Prepare labels/assignees
         label_flags = []
         if labels_raw:
-            for lbl in [l.strip() for l in labels_raw.split(",") if l.strip()]:
+            for lbl in [lbl_raw.strip() for lbl_raw in labels_raw.split(",") if lbl_raw.strip()]:
                 ensure_label(lbl)
                 label_flags += ["--label", lbl]
 
@@ -146,7 +161,9 @@ with open(CSVPATH, newline="", encoding="utf-8") as csvfile:
                 *label_flags,
                 *assignee_flags,
             ]
-        ).split()[-1]  # URL is the last word
+        ).split()[
+            -1
+        ]  # URL is the last word
 
         # 4) Add to Project
         add_to_project(issue_url)

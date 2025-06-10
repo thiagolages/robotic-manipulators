@@ -23,6 +23,18 @@ To get started with this project, follow the instructions below.
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
+### Pre-commit
+On your python environment, run:
+- `pip install pre-commit isort flake8 black`
+
+Run this on the project root:
+- `pre-commit install`
+
+Now every time you `git commit`, `isort, black and flake8` will run.
+
+To manually check files, run:
+- `pre-commit run --all-files`
+
 ### Building the Docker Image
 
 You can build the Docker image using the following command:
