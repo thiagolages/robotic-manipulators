@@ -10,4 +10,4 @@ jobs:
       - name: Check out source repository
         uses: actions/checkout@v2
       - name: Lint commits, branches, and pull requests
-        uses: thiagolages/gitlint-action@v1.2.0
+        uses: thiagolages/gitlint-action@latest
