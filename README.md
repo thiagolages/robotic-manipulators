@@ -74,8 +74,7 @@ This will start the Docker container.
 
 ### Inside the container:
 ```
-python -m roboticstoolbox.tools.np  # sanity-check RTP
-python demo.py                      # talk to CoppeliaSim
+python src/python_coppelia.py  # sanity-check RTP
 ```
 
 ### Stopping the Application
