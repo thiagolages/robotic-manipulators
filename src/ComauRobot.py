@@ -53,7 +53,7 @@ class ComauRobotURDF(Robot, ComauRobot):
 
         print("ComauRobotURDF initialized with the following links:")
         for i, link in enumerate(self.links):
-            print(f"Link {i+1}: {link}")
+            print(f"Link {i + 1}: {link}")
 
 
 # Comau Definition using DH parameters
@@ -83,7 +83,7 @@ class ComauRobotDH(DHRobot, ComauRobot):
         print("ComauRobotDH initialized with the following links:")
         for i, link in enumerate(self.L):
             print(
-                f"Link {i+1}: d={link.d:.4f},\t \
+                f"Link {i + 1}: d={link.d:.4f},\t \
                 a={link.a:.4f},\t \
                 alpha={link.alpha:.4f},\t \
                 offset={link.offset:.4f}"
