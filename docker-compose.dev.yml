@@ -1,0 +1,5 @@
+services:
+  robotic-manipulators:
+    command: sleep infinity
+    restart: "no"
+    #volumes:
