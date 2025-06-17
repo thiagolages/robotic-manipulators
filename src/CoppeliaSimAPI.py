@@ -2,7 +2,7 @@ from coppeliasim_zmqremoteapi_client import RemoteAPIClient
 
 
 class CoppeliaSimAPI:
-    def __init__(self, port=23000):
+    def __init__(self, port=23000, verbose=None):
         """
         Initialize the CoppeliaSim API client.
         """
@@ -11,7 +11,7 @@ class CoppeliaSimAPI:
 
         # port as set via -GzmqRemoteApi.rpcPort
         print("Trying to connect to CoppeliaSim API on port", port)
-        self.client = RemoteAPIClient("localhost", port)
+        self.client = RemoteAPIClient("localhost", port, verbose=verbose)
         self.sim = self.client.require("sim")
 
         print("Connected to CoppeliaSim API.")

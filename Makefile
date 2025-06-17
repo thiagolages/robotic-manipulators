@@ -19,7 +19,11 @@ shell: ## Open a shell in the Docker container
 	docker exec -it ${NAME} bash
 
 .PHONY: run
-run: ## Run the Docker container (detached mode)
+run: ## Run the Docker container
+	docker compose up --remove-orphans
+
+.PHONY: run-detached
+run-detached: ## Run the Docker container (detached mode)
 	docker compose up -d --remove-orphans
 
 .PHONY: dev
