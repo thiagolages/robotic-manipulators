@@ -1,0 +1,3 @@
+[submodule "smart5six_description"]
+	path = smart5six_description
+	url = git@github.com:iaslab-unipd/smart5six_description.git
