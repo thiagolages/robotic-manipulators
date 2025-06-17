@@ -28,7 +28,7 @@ class CoppeliaSimRobot:
         print("Robot setup complete.")
 
     def get_robot(self):
-        print("Trying to get {} handle...".format(self.smartsix_handle))
+        print("Getting {} handle...".format(self.smartsix_handle))
         self.robot_handle = self.sim.getObject(self.smartsix_handle)
 
         if self.robot_handle == -1:
@@ -43,7 +43,7 @@ class CoppeliaSimRobot:
         self.joint_handles = []
         for i in range(self.num_joints):
             joint_name = "/junta{}".format(i + 1)
-            print("Trying to get handle for joint:", joint_name)
+            print("Getting handle for joint:", joint_name)
             handle = self.sim.getObject(joint_name)
             if handle == -1:
                 raise RuntimeError(f"Could not get handle for joint: {joint_name}")
@@ -61,4 +61,4 @@ class CoppeliaSimRobot:
 
         for i in range(self.num_joints):
             self.sim.setJointTargetPosition(self.joint_handles[i], q[i])
-        print("Set joint target positions:", q)
+        print("Set joint target positions:", [round(angle, 4) for angle in q])
