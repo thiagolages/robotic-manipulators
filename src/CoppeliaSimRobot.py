@@ -50,15 +50,17 @@ class CoppeliaSimRobot:
             self.joint_handles.append(handle)
         print("Got all joint handles.")
 
-    def setJointTargetPosition(self, q):
+    def setJointTargetPosition(self, q, verbose=False):
         """
         Set the target position for each joint of the Smartsix robot.
 
         :param q: A list or numpy array of joint angles in radians.
+        :param verbose: If True, print the joint target positions.
         """
         if len(q) != self.num_joints:
             raise ValueError(f"Expected {self.num_joints} joint angles, got {len(q)}")
 
         for i in range(self.num_joints):
             self.sim.setJointTargetPosition(self.joint_handles[i], q[i])
-        print("Set joint target positions:", [round(angle, 4) for angle in q])
+        if verbose:
+            print("Set joint target positions:", [round(angle, 4) for angle in q])

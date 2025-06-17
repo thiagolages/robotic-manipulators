@@ -1,3 +1,7 @@
 #!/bin/bash
 
-/opt/CoppeliaSim/coppeliaSim.sh -f /home/comau/robotic-manipulators/data/smartsix.ttt -GpreferredSandboxLang=python -GzmqRemoteApi.rpcPort=23000 -GzmqRemoteApi.keepServerAlive=1
+# Start robot control script
+/home/comau/venv/bin/python $HOME/robotic-manipulators/src/control.py &
+
+# Start CoppeliaSim
+/home/comau/start_coppeliasim.sh
