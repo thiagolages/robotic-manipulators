@@ -10,3 +10,4 @@ scipy
 spatialmath-python
 swift-sim
 websockets<11
+parameterized

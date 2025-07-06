@@ -5,6 +5,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw   # GUI sharing
       - ./src:/home/comau/robotic-manipulators/src
       - ./data:/home/comau/robotic-manipulators/data
+      - ./test:/home/comau/robotic-manipulators/test
     # entrypoint: ["/bin/bash", "-l", "-c", "sleep infinity"]
     command: /home/comau/command.sh
     environment:

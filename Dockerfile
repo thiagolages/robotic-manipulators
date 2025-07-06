@@ -37,13 +37,35 @@ COPY requirements.txt .
 
 # 4. Basic build essentials + X11 + Python
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-venv python3-pip python3-dev sudo unzip\
-    build-essential git wget curl ca-certificates \
-    libglu1-mesa libxi6 libxrender1 libxext6 libxkbcommon-x11-0 \
-    libqt5widgets5 libqt5gui5 libqt5core5a libx11-xcb1 libxcb-xinerama0 \
-    xvfb x11-utils socat \
+    python3 \
+    python3-venv \
+    python3-pip \
+    python3-dev \
+    sudo \
+    unzip \
+    build-essential \
+    git \
+    wget \
+    curl \
+    nano \
+    htop \
+    ca-certificates \
+    libglu1-mesa \
+    libxi6 \
+    libxrender1 \
+    libxext6 \
+    libxkbcommon-x11-0 \
+    libqt5widgets5 \
+    libqt5gui5 \
+    libqt5core5a \
+    libx11-xcb1 \
+    libxcb-xinerama0 \
+    xvfb \
+    x11-utils \
+    socat \
     # Install these packages so that CoppeliaSim doesn't show errors
-    libzmq5 libsodium23 && \
+    libzmq5 \
+    libsodium23 && \
     rm -rf /var/lib/apt/lists/* && \
     # refresh linker cache after installing libzmq5 libsodium23 libraries
     ldconfig
