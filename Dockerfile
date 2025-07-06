@@ -114,6 +114,7 @@ echo "source $HOME/venv/bin/activate" >> $HOME/.bashrc
 
 # 11. Copy the command script to the home directory
 COPY command.sh ${HOME}
+COPY start_coppeliasim.sh ${HOME}
 
 # 12. Create the restart_coppelia.sh script
 RUN echo '#!/bin/bash' > /home/comau/restart_coppelia.sh && \
@@ -122,6 +123,6 @@ RUN echo '#!/bin/bash' > /home/comau/restart_coppelia.sh && \
     chmod +x /home/comau/restart_coppelia.sh && \
     chown comau:comau /home/comau/restart_coppelia.sh
 
-# 13. Add restart_coppelia alias to .bashrc
-RUN echo "alias coppeliasim='/home/comau/command.sh'" >> /home/comau/.bashrc
-RUN echo "alias restart_coppelia='/home/comau/restart_coppelia.sh'" >> /home/comau/.bashrc
+# 12. Add alias to .bashrc
+RUN echo "alias coppeliasim='/home/comau/start_coppeliasim.sh'" >> /home/comau/.bashrc && \
+    echo "alias control='/home/comau/venv/bin/python /home/comau/robotic-manipulators/src/control.py'" >> /home/comau/.bashrc
